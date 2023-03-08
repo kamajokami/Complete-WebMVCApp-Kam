@@ -1,6 +1,6 @@
 ﻿namespace WebMVCApplKamPublic.Models
 {
-    public class PersonList
+    public class Person
     {
         /*
         
