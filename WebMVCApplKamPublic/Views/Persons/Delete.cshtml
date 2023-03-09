@@ -1,0 +1,49 @@
+﻿@model WebMVCApplKamPublic.Models.Person
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="col-12 mx-auto pt-0 p-0">
+    <form asp-action="Delete">
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+            <div class="card-header bg-danger text-uppercase text-white text-center mb-2 pt-0" style="height:25px;">
+                <h4>Person - Delete</h4>
+                <h4 class="text-danger">Opravdu chcete vymazat záznam? / Are you sure you want to delete the record of "@Model.Name?"</h4>
+            </div>
+        </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control form-control-plaintext" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control form-control-plaintext" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control form-control-plaintext" readonly />
+            </div>
+        </div>
+
+        <div class="btn-group col-6 p-2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger btn-block" style="width:150px" />
+            <a class="btn btn-secondary btn-block" asp-action="Index" style="width:150px">
+                Back to list
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+

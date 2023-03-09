@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using WebMVCApplKamPublic.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +7,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>();
+
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+// Tento kód musí být pøidán, aby mi fungoval Bootstrap
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+
+// Identita uživatele --> Využití API
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie();
+
+
 
 var app = builder.Build();
 
@@ -23,10 +37,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

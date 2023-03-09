@@ -1,3 +1,8 @@
+:root {
+    font-size: 14px;
+    --accent-color: #ed6434;
+}
+
 html {
   font-size: 14px;
 }
@@ -16,3 +21,113 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.border-top {
+    border-top: 1px solid #E5E5E5;
+}
+
+@font-face {
+    src: url(../fonts/Poppins-Regular.ttf)
+}
+
+@font-face {
+    src: url(../fonts/Poppins-ExtraBold.ttf)
+}
+
+.site-heading {
+    text-align: left;
+    margin-top: 3rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.nav-pills a.active,
+.form-check-input:checked {
+    background-color: black !important;
+    border-color: black !important;
+}
+
+.nav-pills a:not(.active) {
+    color: black !important;
+}
+
+h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.7em;
+    font-weight: bold;
+    color: #F3B614;
+    text-align: center;
+    text-shadow: 2px 2px 1px #0a294b;
+    vertical-align: top;
+}
+
+h2 {
+    font-size: 1.6em;
+    color: #004A97;
+    text-shadow: 0px 0px 1px #0a294b;
+    box-shadow: #006797 4px 6px 20px;
+}
+
+
+#logo {
+    background: url('../images/logo.png') no-repeat;
+    background-size: 20px, 20px;
+    height: 40px;
+    float: left;
+    margin: auto 0 auto 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+    #logo h1 {
+        margin: 14px 0px 0px 0px;
+        color: lightgreen;
+    }
+
+nav ul li:hover, .aktivni {
+    background: #ffbb00;
+    box-shadow: 0px 0px 2px black;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Zajištìní dostateèného kontrastu proti bílému pozadí */
+a {
+    color: #0366d6;
+}
+
+header {
+    height: 73px;
+    top: 0px;
+    width: 100%;
+}
+
+footer {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    white-space: nowrap;
+}
+
+footer a {
+    color: #ffbb00;
+    text-decoration: none;
+}
+
+
