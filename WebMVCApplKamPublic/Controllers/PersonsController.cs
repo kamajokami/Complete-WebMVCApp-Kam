@@ -47,9 +47,10 @@ namespace WebMVCApplKamPublic.Controllers
 
         public IActionResult Create()
         {
-            return View();
-        }
+            Person person = new Person();
 
+            return View(person);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,11 +58,20 @@ namespace WebMVCApplKamPublic.Controllers
         {
             if (person is null)
             {
-                return NotFound();
+                return NotFound("Záznam nenalezen. Zkuste to znovu.");
             }
 
             if (!ModelState.IsValid)
             {
+                return View(person);
+            }
+
+            if (string.IsNullOrWhiteSpace(person.Name) || person.Name.Length < 2)
+            {
+                string errorMessage = $"Jméno musí mít alespoň dva znaky.";
+
+                ModelState.AddModelError("", errorMessage);
+
                 return View(person);
             }
 
@@ -78,7 +88,7 @@ namespace WebMVCApplKamPublic.Controllers
                 SqliteExtendedErrorCode: SQLITE_CONSTRAINT_UNIQUE_ERROR_CODE
             })
             {
-                string errorMessage = "Email již existuje, přihlašte se";
+                string errorMessage = "Email již existuje, zadejte jiný.";
 
                 TempData["error"] = errorMessage;
                 ModelState.AddModelError("", errorMessage);
@@ -119,6 +129,8 @@ namespace WebMVCApplKamPublic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Person person)
         {
+            string errorMessage;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -129,26 +141,45 @@ namespace WebMVCApplKamPublic.Controllers
                 return NotFound("Záznam nenalezen. Zkuste to znovu.");
             }
 
-
-            string errorMessage;
-
             if (string.IsNullOrWhiteSpace(person.Name) || person.Name.Length < 2)
             {
-                errorMessage = $"Jméno musí být alespoň dva znaky";
+                errorMessage = $"Jméno musí mít alespoň dva znaky.";
+
+                ModelState.AddModelError("", errorMessage);
+
+                return View(person);
             }
 
-            if (ModelState.IsValid)
+            const int SQLITE_CONSTRAINT_ERROR_CODE = 19;
+            const int SQLITE_CONSTRAINT_UNIQUE_ERROR_CODE = SQLITE_CONSTRAINT_ERROR_CODE | (8 << 8);
+
+            try
             {
                 _context.Persons.Update(person);
                 await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException dbupdateEx) when (dbupdateEx.InnerException is SqliteException
+            {
+                SqliteExtendedErrorCode: SQLITE_CONSTRAINT_UNIQUE_ERROR_CODE
+            })
+            {
+                errorMessage = "Email již existuje, zadejte jiný.";
 
-                TempData["success"] = "The person updated successfully.";
+                TempData["error"] = errorMessage;
+                ModelState.AddModelError("", errorMessage);
+                return View(person);
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Nastala neošetřená chyba: {Environment.NewLine}{ex}";
 
-                return RedirectToAction("Index");
+                TempData["error"] = errorMessage;
+                ModelState.AddModelError("", errorMessage);
+                return View(person);
             }
 
-            return View(person);
-      
+            TempData["success"] = "Person updated successfully.";
+            return RedirectToAction(nameof(Index));      
         }
 
 

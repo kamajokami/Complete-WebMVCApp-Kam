@@ -38,7 +38,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Email)
                     </th>
-                    @*<th></th>*@
                 </tr>
             </thead>
             <tbody>
@@ -57,11 +56,6 @@
                         <td>
                             @*<div class="w-75 btn-group" role="group">*@
                             <div class="btn-group">
-                                <a asp-action="Details" asp-route-id="@item.Id">
-                                    <span class="btn btn-primary mx-1"></span>
-                                    <i class="bi bi-eye" aria-hidden="true"></i>
-                                    Details
-                                </a>
                                 <a asp-action="Edit" asp-route-id="@item.Id">
                                     <span class="btn btn-warning mx-1"></span>
                                     <i class="bi bi-pencil-square" aria-hidden="true"></i>
