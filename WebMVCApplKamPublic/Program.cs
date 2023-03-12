@@ -1,19 +1,22 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using WebMVCApplKamPublic.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddDbContext<ApplicationDbContext>();
-
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
+builder.Services.AddRazorPages();
 // Tento kód musí být pøidán, aby mi fungoval Bootstrap
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+
+
+// Add DB
+//builder.Services.AddDbContext<ApplicationDbContext>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(
+    builder.Configuration.GetConnectionString("LocalDB")));
 
 
 // Identita uživatele --> Využití API
