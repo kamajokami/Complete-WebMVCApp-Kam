@@ -1,0 +1,112 @@
+﻿@model WebMVCApplKamPublic.Models.ViewModels.PriceViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="col-12 mx-auto pt-0 p-0">
+    <div class="card">
+        <div class="card-header bg-danger text-uppercase text-white text-center mb-2 pt-0" style="height:25px;">
+            <h4>Adding a commodity - Create</h4>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" method="post" asp-controller="PriceViewModel" asp-action="Create">
+
+                <div class="col-md-10">
+
+                    <div class="row">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group col-6">
+                            <!-- asp-for jsou tag helpers generující vhodné ovládací prvky -->
+                            <label asp-for="Title" class="control-label">Předmět</label>
+                            <input asp-for="Title" class="form-control" />
+                            <!-- Výpis chybové hlášky -->
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label asp-for="Currency" class="control-label">Měna</label>
+                            <input asp-for="Currency" class="form-control" />
+                            <span asp-validation-for="Currency" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label asp-for="PriceMoney" class="control-label">Cena zboží</label>
+                            <input asp-for="PriceMoney" class="form-control" />
+                            <span asp-validation-for="PriceMoney" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label asp-for="Width" class="control-label">Šířka</label>
+                            <input asp-for="Width" class="form-control" />
+                            <span asp-validation-for="Width" class="text-danger"></span>
+                        </div>
+
+                        @*<div class="form-check mb-3">
+                            <label class="form-check-label" asp-for="IsSale">Výprodej</label>
+                            <input class="form-check-input" type="checkbox" value="" asp-for="IsSale" />
+                            <span asp-validation-for="IsSale" class="text-danger"></span>
+                        </div>*@
+
+                        <div class="form-check mb-3">
+                            @*<label class="form-check-label" asp-for="IsCommodityActive">Dostupnost zboží</label>*@
+                            <label class="form-check-label" asp-for="IsCommodityActive">
+                                @Model.IsCommodityActiveCheckboxDescription
+                            </label>
+                            <input class="form-check-input" type="checkbox" value="" asp-for="IsCommodityActive" />
+                        </div>
+
+                       @* <div class="form-check mb-3">
+                            <label class="form-check-label" asp-for="IsPropertyOwner">Vlastník nemovitosti</label>
+                            <input class="form-check-input" type="checkbox" value="" asp-for="IsPropertyOwner" />
+                            <span asp-validation-for="IsPropertyOwner" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <label class="form-check-label" asp-for="IsBuyerMan">Kupující muž</label>
+                            <input class="form-check-input" type="checkbox" value="" asp-for="IsBuyerMan" />
+                            <span asp-validation-for="IsBuyerMan" class=" text-danger"></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <label class="form-check-label" asp-for="IsBuyerWoman">Kupující žena</label>
+                            <input class="form-check-input" type="checkbox" value="" asp-for="IsBuyerWoman" />
+                            <span asp-validation-for="IsBuyerWoman" class=" text-danger"></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <label class="form-check-label" asp-for="SendConsent">Odeslat souhlas</label>
+                            <input class="form-check-input" type="checkbox" value="" asp-for="SendConsent" />
+                            <span asp-validation-for="SendConsent" class=" text-danger"></span>
+                        </div>*@
+
+                    </div>
+                </div>
+
+                <div class="col-12 btn-group">
+                    <div class="col-6 form-group text-right p-2">
+                        <a class="btn btn-dark btn-block" asp-action="Index" style="width:150px">
+                            Back to list
+                        </a>
+                    </div>
+
+                    <div class="col-6 form-group text-left p-2">
+                        <input type="submit" value="Create" class="btn btn-primary btn-block" style="width:150px" />
+                        @*<button type="submit" class="btn btn-primary btn-block" style="width:150px"></button>*@
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+

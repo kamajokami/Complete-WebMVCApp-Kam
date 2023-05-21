@@ -1,0 +1,129 @@
+﻿@using WebMVCApplKamPublic.Models.ViewModels;
+@model IEnumerable<WebMVCApplKamPublic.Models.ViewModels.PriceViewModel>
+
+
+@{
+    ViewData["Title"] = "Commodity list";
+}
+
+<div class="container p-1">
+    <div class="col-12">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="col-12 pt-2 text-start">
+        <p>
+            <a asp-controller="PriceViewModel" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add New commodity
+            </a>
+        </p>
+    </div>
+</div>
+
+
+<div class="table-responsive">
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Currency)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PriceMoney)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Width)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsSale)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsCommodityActive)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsPropertyOwner)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsBuyerMan)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsBuyerWoman)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SendConsent)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model ?? Enumerable.Empty<PriceViewModel>())
+                {
+                    <tr>
+                        <td width="25%">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td width="5%">
+                            @Html.DisplayFor(modelItem => item.Currency)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.PriceMoney)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.Width)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.IsSale)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.IsCommodityActive)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.IsPropertyOwner)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.IsBuyerMan)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.IsBuyerWoman)
+                        </td>
+                        <td width="10%">
+                            @Html.DisplayFor(modelItem => item.SendConsent)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-action="Edit" asp-route-id="@item.Id">
+                                    <span class="btn btn-warning mx-1"></span>
+                                    <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                                    Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id">
+                                    <span class="btn btn-danger mx-1"></span>
+                                    <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div>
+            <p><strong>There are no items on this page yet. </strong></p>
+            <p><strong>To view, create a new record or switch to the current page. </strong></p>
+        </div>
+    }
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

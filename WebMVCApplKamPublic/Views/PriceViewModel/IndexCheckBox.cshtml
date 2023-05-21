@@ -1,0 +1,104 @@
+﻿@using WebMVCApplKamPublic.Models.ViewModels;
+@model WebMVCApplKamPublic.Models.ViewModels.PriceViewModel
+
+
+@{
+    ViewData["Title"] = "CheckBoxTest";
+}
+
+@*<div class="container p-1">
+    <div class="col-12">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="col-12 pt-2 text-start">
+        <p>
+            <a asp-controller="PriceViewModel" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add New options
+            </a>
+        </p>
+    </div>
+</div>*@
+
+
+<div class="col-12 mx-auto pt-0 p-0">
+    <form asp-controller="PriceViewModel" asp-action="IndexCheckBox" method="post">
+
+        <div class="col-md-10">
+
+            <div class="row">
+
+                @foreach(var item in Model.Checkboxes)
+                {
+                    <div class="form-check mb-3">
+                        <label class="form-check-label" 
+                            for="checkbox_@item.Value">
+                            @item.Description
+                        </label>
+                                
+                        <input class="form-check-input" 
+                        type="checkbox" 
+                        value="@item.Value"
+                        name="UniqueName"
+                        id="checkbox_@item.Value"
+                        checked="@item.IsChecked">
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-12 btn-group">
+            <div class="col-6 form-group text-right p-2">
+                <a class="btn btn-dark btn-block" asp-action="IndexCheckBox" style="width:150px">
+                    Back to list
+                </a>
+            </div>
+
+            <div class="col-6 form-group text-left p-2">
+                <button type="submit" class="btn btn-primary btn-block" style="width:150px"></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@*<div class="form-check">
+    <label class="form-check-label" asp-for="IsSale">Is Sale</label>
+    <input class="form-check-input" type="checkbox" value="" asp-for="IsSale" />
+
+</div>
+
+<div class="form-check">
+    <label class="form-check-label" asp-for="IsCommodityActive">Is Commodity Active</label>
+    <input class="form-check-input" type="checkbox" value="" asp-for="IsCommodityActive" />
+</div>
+
+<div class="form-check">
+    <label class="form-check-label" asp-for="IsPropertyOwner">Is Property Owner</label>
+    <input class="form-check-input" type="checkbox" value="" asp-for="IsPropertyOwner" />
+</div>
+
+
+<div class="form-check">
+    <label class="form-check-label" asp-for="IsBuyerMan">Muž</label>
+    <input class="form-check-input" type="checkbox" value="" asp-for="IsBuyerMan" />
+</div>
+
+<div class="form-check">
+    <label class="form-check-label" asp-for="IsBuyerWoman">Žena</label>
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+</div>
+
+<div class="form-check">
+    <label class="form-check-label" asp-for="SendConsent">Odeslat souhlas</label>
+    <input class="form-check-input" type="checkbox" value="" asp-for="SendConsent" />
+</div>
+
+*@
+
+
+
+@*<div class="form-check">
+    <label class="form-check-label" formaction="flexCheckDefault">Send Consent</label>
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+</div>*@
